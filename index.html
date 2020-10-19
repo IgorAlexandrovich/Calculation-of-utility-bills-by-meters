@@ -5,25 +5,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .wrapper {
+            border-radius: 5px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: rgb(209, 204, 204);
+            width: 370px;
+            height: 550px;
+        }
+
+        input {
+
+            border-radius: 5px;
+            margin: 6px;
+            padding: 7px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            font-size: 20px;
+            margin: 6px;
+        }
+    </style>
 </head>
 
 <body>
-    <form action="bd2.php">
-        <input type="date" class="data_entry" required>
-        <label for="">Введите дату</label> <br>
-        <input type="namber" class="data_entry" required pattern="^[0-9]+$">
-        <label for="">Введите показания электроэнергии день</label> <br>
-        <input type="text" class="data_entry" required pattern="^[0-9]+$">
-        <label for="">Введите показания электроэнергии ночь</label> <br>
-        <input type="text" class="data_entry" required pattern="\d+(\.\d{3})?">
-        <label for="">Введите показания холодной воды</label> <br>
-        <input type="text" class="data_entry" required pattern="\d+(\.\d{3})?">
-        <label for="">Введите показания горячей воды</label> <br>
-        <input type="submit" id="button" value="передать показания"><br>
-        <label for=""> Ввдите почту для отправки копии</label><br>
-        <input type="mail" id="mail">
+    <div class="wrapper">
+        <h2>Расчет оплаты за комунальные услуги</h2>
+        <form action="bd2.php">
+            <label for="date">Введите дату</label> <br>
+            <input type="date" id="date" class="data_entry" required> <br>
 
-    </form>
+            <label for="namber">Введите показания электроэнергии день</label> <br>
+            <input type="text" id="namber" class="data_entry" required pattern="^[0-9]+$"><br>
+
+            <label for="namber2">Введите показания электроэнергии ночь</label> <br>
+            <input type="text" id="namber2" class="data_entry" required pattern="^[0-9]+$"><br>
+
+            <label for="namber3">Введите показания холодной воды</label> <br>
+            <input type="text" id="namber3" class="data_entry" required pattern="\d+(\.\d{3})?"><br>
+
+            <label for="namber4">Введите показания горячей воды</label> <br>
+            <input type="text" id="namber4" class="data_entry" required pattern="\d+(\.\d{3})?"><br>
+
+            <input type="submit" id="button" value="передать показания"><br>
+            <label for="mail"> Ввдите mail для отправки копии</label><br>
+            <input type="mail" id="mail">
+
+        </form>
+    </div>
+
     <div class="container">
     </div>
     <script>
@@ -48,7 +83,7 @@
             itog_calculation()
             summarize()
 
-            let result = confirm('Сумма к оплате составляет ' + summa + ' рублей.');
+            let result = confirm('Сумма к оплате составляет ' + summa + ' рублей. Для изменения показаний нажмите "Отмена"  Для передачи нажмите "ОК"');
             if (result) {
                 container.innerHTML = '<h3 >Оплата составляет</h3> <b>' + summa + "</b> Рублей" + ' за ' + indication.date;// переписываем инфу контейнера на нужный нам текст
                 receiving('forma')//передача в БД
@@ -58,7 +93,7 @@
 
             }
             else {
-                alert('введите показания заново');
+
                 receiving('reception');
             }
         });// создаем  обьект с новыми показаниями + вставить выввод итога и отправку в БД нов показ
