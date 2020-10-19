@@ -19,10 +19,10 @@
         <label for="">Введите показания холодной воды</label> <br>
         <input type="text" class="data_entry" required pattern="\d+(\.\d{3})?">
         <label for="">Введите показания горячей воды</label> <br>
-        <input type="submit" id="button" value = "передать показания"><br>
+        <input type="submit" id="button" value="передать показания"><br>
         <label for=""> Ввдите почту для отправки копии</label><br>
         <input type="mail" id="mail">
-        
+
     </form>
     <div class="container">
     </div>
@@ -54,8 +54,8 @@
                 receiving('forma')//передача в БД
                 receiving('reception')
                 receiving('mail')
-                form.innerHTML = '<p> <strong>Показания успешно переданы</strong></p>';
-                
+                form.reset();
+
             }
             else {
                 alert('введите показания заново');
@@ -100,10 +100,10 @@
                 let text = await responce.text()
 
             }
-            
-            if(a === 'mail'){
-                
-                  let option = {
+
+            if (a === 'mail') {
+
+                let option = {
                     method: "post",
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded"
@@ -113,6 +113,7 @@
                 let responce = await fetch('mail.php', option);
                 let text = await responce.text()
             }
+
         }
 
 
