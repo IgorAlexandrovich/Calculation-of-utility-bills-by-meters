@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Расчет коммуналки</title>
     <style>
-        body{
-            background-color:rgb(196, 195, 195) ;
+        body {
+            background-color: rgb(196, 195, 195);
         }
+
         .wrapper {
             border-radius: 5px;
             margin-left: auto;
@@ -32,27 +33,29 @@
             font-size: 20px;
             margin: 6px;
         }
-        #button{
+
+        #button {
             margin-left: 80px;
             font-size: 20px;
-            color:rgb(105, 115, 255);
+            color: rgb(105, 115, 255);
         }
-       .button_prompt{
-           border:1px solid black;
-       }
+
+        .button_prompt {
+            border: 1px solid black;
+        }
     </style>
 </head>
 
 <body>
-    
+
     <div class="wrapper">
         <h2>Расчет оплаты за коммунальные услуги</h2>
         <p>
-        Все поля заполняются исключительно цифрами с разделительным занаком "." <br>
-        После нажатия на кнопку "отправить" высвечивается сумма оплаты за текущий период.<br> 
-        Если сумма некорректна, вы можете вернуться к исправлению показаний, нажав кнопку "отмена"  <br>
-        Также для получения суммы и периода оплаты введите свою электронную почту <br>
-    </p>
+            Все поля заполняются исключительно цифрами с разделительным занаком "." <br>
+            После нажатия на кнопку "отправить" высвечивается сумма оплаты за текущий период.<br>
+            Если сумма некорректна, вы можете вернуться к исправлению показаний, нажав кнопку "отмена" <br>
+            Также для получения суммы и периода оплаты введите свою электронную почту <br>
+        </p>
         <form action="bd2.php">
             <label for="date">Введите дату</label> <br>
             <input type="date" id="date" class="data_entry" required> <br>
@@ -84,11 +87,11 @@
     <a href="prompt.html"> Подсказка</a>
     <script>
         const button_prompt = document.querySelectorAll('.button_prompt')
-        button_prompt[0].addEventListener('click' , function(){
-                alert('сработала кнопка 1')
+        button_prompt[0].addEventListener('click', function () {
+            alert('сработала кнопка 1')
         })
-        button_prompt[1].addEventListener('click' , function(){
-                alert('сработала кнопка 2')
+        button_prompt[1].addEventListener('click', function () {
+            alert('сработала кнопка 2')
         })
         let price = new Data(0, 5.6, 1.63, 205.15, 42.3, 30.9);
         receiving('reception');// подгрузка данных  из БД
@@ -138,6 +141,9 @@
                 let count1 = 0;
                 let count = 1;
                 for (let i in previous_indication) {
+                    if(data_entry[count] === undefined ){
+                        breack
+                    }
                     previous_indication[i] = text[count1]
                     count1++
                     data_entry[count].placeholder = text[count];
