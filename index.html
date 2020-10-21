@@ -40,11 +40,50 @@
        .button_prompt{
            border:1px solid black;
        }
+       .modal{ 
+           background-color: bisque;  
+        display: none;
+        width: 300px;
+        height: 200px;
+        text-align: center;
+        padding: 15px;
+        border: 3px solid #0000cc;
+        border-radius: 10px;
+        color: #0000cc;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        }
+        .modal_block{
+            display: block;
+        }
+        .img_voda{
+            display:none;
+            width: 120px;
+            height: 180px;
+        }
+        .img_electr{
+            display: none;
+            width: 120px;
+            height: 180px;
+            
+        }
+        .a{
+            display: block;
+        }
+
     </style>
 </head>
 
 <body>
-    
+    <div class="modal">
+        <img class="img_voda" src="picture\water_meter.jpg" alt="Фото счетчика с описанием"><br>
+        <img class="img_electr" src="picture\electricity_meter.jpg" alt="Фото счетчика с описанием">
+        <div class="button_close">Закрыть</div>
+    </div>
     <div class="wrapper">
         <h2>Расчет оплаты за коммунальные услуги</h2>
         <p>
@@ -59,14 +98,14 @@
 
             <label for="namber">Введите показания электроэнергии день</label> <br>
             <input type="text" id="namber" class="data_entry" required pattern="^[0-9]+$">
-            <span class="button_prompt"> Подсказка</span><br>
+            <span class="button_prompt" id="electric"> Подсказка</span><br>
 
             <label for="namber2">Введите показания электроэнергии ночь</label> <br>
             <input type="text" id="namber2" class="data_entry" required pattern="^[0-9]+$"><br>
 
             <label for="namber3">Введите показания холодной воды</label> <br>
             <input type="text" id="namber3" class="data_entry" required pattern="\d+(\.\d{3})?">
-            <span class="button_prompt"> Подсказка</span><br>
+            <span class="button_prompt" id="voda"> Подсказка</span><br>
 
             <label for="namber4">Введите показания горячей воды</label> <br>
             <input type="text" id="namber4" class="data_entry" required pattern="\d+(\.\d{3})?"><br>
@@ -83,12 +122,31 @@
 
     <a href="prompt.html"> Подсказка</a>
     <script>
+        const a = document.querySelector('.a')
+        const img_voda = document.querySelector('.img_voda')
+        const img_electr = document.querySelector('.img_electr')
         const button_prompt = document.querySelectorAll('.button_prompt')
+        const modal = document.querySelector('.modal');
+        const button_close = document.querySelector('.button_close')
+        button_close.addEventListener('click' , function(){
+        
+           modal_toggle (modal)  
+           img_electr.classList.remove('a')
+           img_voda.classList.remove('a')
+        })
         button_prompt[0].addEventListener('click' , function(){
-                alert('сработала кнопка 1')
+        
+            modal_toggle (modal)  
+        
+            img_electr.classList.toggle('a')
+            
         })
         button_prompt[1].addEventListener('click' , function(){
-                alert('сработала кнопка 2')
+      
+            modal_toggle (modal)
+        
+           img_voda.classList.toggle('a')
+            
         })
         let price = new Data(0, 5.6, 1.63, 205.15, 42.3, 30.9);
         receiving('reception');// подгрузка данных  из БД
@@ -228,6 +286,10 @@
 
             return summa
         }
+function modal_toggle (el){
+    el.classList.toggle('modal_block')
+}
+
 
     </script>
 </body>
