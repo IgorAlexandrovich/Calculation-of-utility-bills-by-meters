@@ -18,8 +18,8 @@ $mail->Port = 465; // TCP port to connect to / этот порт может от
 
 $mail->setFrom($config['mail']); // от кого будет уходить письмо?
 $mail->addAddress($mail_vvod);     // Кому будет уходить письмо 
-$mail->Subject = 'Сумма за комуналку';
-$mail->Body    = '' .$payment. ' рублей должны квартиранты за комуналку ';
+$mail->Subject = 'Сумма за коммуналку';
+$mail->Body    = '' .$payment. ' рублей должны квартиранты за коммуналку ';
 $mail->AltBody = '';
 
 if(!$mail->send()) {
