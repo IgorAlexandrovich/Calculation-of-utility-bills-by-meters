@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Расчет коммуналки</title>
     <style>
-        body {
-            background-color: rgb(196, 195, 195);
+        body{
+            background-color:rgb(196, 195, 195) ;
+            
         }
-
         .wrapper {
             border-radius: 5px;
             margin-left: auto;
@@ -23,6 +23,7 @@
             border-radius: 5px;
             margin: 6px;
             padding: 7px;
+            
         }
 
         h2 {
@@ -33,43 +34,126 @@
             font-size: 20px;
             margin: 6px;
         }
-
-        #button {
+        #button{
             margin-left: 80px;
             font-size: 20px;
-            color: rgb(105, 115, 255);
+            color:red;
+            cursor: pointer;
+            
         }
+       .button_prompt{
+           border:1px solid black;
+           border-radius: 5px;
+           padding: 5px;
+           cursor: pointer;
+       }
+       .button_close{
+           border:1px solid black;
+           width: 20px;
+            height: 20px;
+            cursor: pointer;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 5px;
+            border-radius: 5px;
 
-        .button_prompt {
-            border: 1px solid black;
+       }
+       .button_open_close_text{
+          color: blue;
+           width: 90px;
+            height: 20px;
+            cursor: pointer;
+            margin-left: auto;
+            margin-right: auto;
+    padding-left: 300px
+            
+
+       }
+       .modal{ 
+        background-color: grey;  
+        display: none;
+        width: 300px;
+        height: 260px;
+        text-align: center;
+        padding: 15px;
+        border: 1px solid black;
+        border-radius: 10px;
+        color: #0000cc;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
         }
+        .modal_block{
+            display: block;
+        }
+        .img_voda{
+            display:none;
+            width: 140px;
+            height: 200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .img_electr{
+            margin-left: auto;
+            margin-right: auto;
+            display: none;
+            width: 300px;
+            height: 180px;
+            
+        }
+        .a{
+            display: block;
+        }
+.text_wrapper{
+    overflow: hidden;
+        border:1px solid black;
+        width: 400px;
+        height: 40px;
+        margin-left: auto;
+        margin-right: auto;
+}
+
+.text_wrapper_hide{
+     height: auto;
+}
     </style>
 </head>
 
 <body>
-
+    <div class="modal"><div class="button_close">X</div>
+        <img class="img_voda" src="picture\water_meter.jpg" alt="Фото счетчика с описанием"><br>
+        <img class="img_electr" src="picture\electricity_meter.jpg" alt="Фото счетчика с описанием">
+        
+    </div>
+      <h2>Расчет оплаты за коммунальные услуги</h2>
+        <div class="text_wrapper">
+        <p>   
+        Все поля заполняются исключительно цифрами с разделительным занаком "." <br>
+        После нажатия на кнопку "отправить" высвечивается сумма оплаты за текущий период.<br> 
+        Если сумма некорректна, вы можете вернуться к исправлению показаний, нажав кнопку "отмена"  <br>
+        Также для получения суммы и периода оплаты введите свою электронную почту <br>
+        </p> <br>
+        
+        </div><div class="button_open_close_text">читать далее</div>
     <div class="wrapper">
-        <h2>Расчет оплаты за коммунальные услуги</h2>
-        <p>
-            Все поля заполняются исключительно цифрами с разделительным занаком "." <br>
-            После нажатия на кнопку "отправить" высвечивается сумма оплаты за текущий период.<br>
-            Если сумма некорректна, вы можете вернуться к исправлению показаний, нажав кнопку "отмена" <br>
-            Также для получения суммы и периода оплаты введите свою электронную почту <br>
-        </p>
+      
         <form action="bd2.php">
             <label for="date">Введите дату</label> <br>
             <input type="date" id="date" class="data_entry" required> <br>
 
             <label for="namber">Введите показания электроэнергии день</label> <br>
             <input type="text" id="namber" class="data_entry" required pattern="^[0-9]+$">
-            <span class="button_prompt"> Подсказка</span><br>
+            <span class="button_prompt" id="electric"> Подсказка</span><br>
 
             <label for="namber2">Введите показания электроэнергии ночь</label> <br>
             <input type="text" id="namber2" class="data_entry" required pattern="^[0-9]+$"><br>
 
             <label for="namber3">Введите показания холодной воды</label> <br>
             <input type="text" id="namber3" class="data_entry" required pattern="\d+(\.\d{3})?">
-            <span class="button_prompt"> Подсказка</span><br>
+            <span class="button_prompt" id="voda"> Подсказка</span><br>
 
             <label for="namber4">Введите показания горячей воды</label> <br>
             <input type="text" id="namber4" class="data_entry" required pattern="\d+(\.\d{3})?"><br>
@@ -84,14 +168,41 @@
     <div class="container">
     </div>
 
-    <a href="prompt.html"> Подсказка</a>
+
     <script>
-        const button_prompt = document.querySelectorAll('.button_prompt')
-        button_prompt[0].addEventListener('click', function () {
-            alert('сработала кнопка 1')
+        const text_wrapper = document.querySelector('.text_wrapper')
+        const button_open_close_text = document.querySelector('.button_open_close_text')
+        button_open_close_text.addEventListener('click',()=>{
+             text_wrapper.classList.toggle('text_wrapper_hide')
         })
-        button_prompt[1].addEventListener('click', function () {
-            alert('сработала кнопка 2')
+       
+
+
+        const a = document.querySelector('.a')
+        const img_voda = document.querySelector('.img_voda')
+        const img_electr = document.querySelector('.img_electr')
+        const button_prompt = document.querySelectorAll('.button_prompt')
+        const modal = document.querySelector('.modal');
+        const button_close = document.querySelector('.button_close')
+        button_close.addEventListener('click' , function(){
+        
+           modal_toggle (modal)  
+           img_electr.classList.remove('a')
+           img_voda.classList.remove('a')
+        })
+        button_prompt[0].addEventListener('click' , function(){
+        
+            modal_toggle (modal)  
+        
+            img_electr.classList.toggle('a')
+            
+        })
+        button_prompt[1].addEventListener('click' , function(){
+      
+            modal_toggle (modal)
+        
+           img_voda.classList.toggle('a')
+            
         })
         let price = new Data(0, 5.6, 1.63, 205.15, 42.3, 30.9);
         receiving('reception');// подгрузка данных  из БД
@@ -141,9 +252,6 @@
                 let count1 = 0;
                 let count = 1;
                 for (let i in previous_indication) {
-                    if(data_entry[count] === undefined ){
-                        breack
-                    }
                     previous_indication[i] = text[count1]
                     count1++
                     data_entry[count].placeholder = text[count];
@@ -234,6 +342,10 @@
 
             return summa
         }
+function modal_toggle (el){
+    el.classList.toggle('modal_block')
+}
+
 
     </script>
 </body>
