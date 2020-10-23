@@ -276,7 +276,7 @@
                 let count1 = 0;
                 let count = 1;
                 for (let i in previous_indication) {
-                    if(data_entry[count] === undefined ){
+                    if (data_entry[count] === undefined) {
                         break
                     }
                     previous_indication[i] = text[count1]
@@ -311,7 +311,7 @@
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded"
                     },
-                    body: "payment=" + summa + '&' + 'mail=' + mail.value
+                    body: "payment=" + summa + '&' + 'mail=' + mail.value + '&' + 'date=' + indication.date
                 }
                 let responce = await fetch('mail.php', option);
                 let text = await responce.text()
