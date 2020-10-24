@@ -91,9 +91,7 @@
             margin: auto;
         }
 
-        .modal_block {
-            display: block;
-        }
+     
 
         .img_voda {
             display: none;
@@ -112,7 +110,7 @@
 
         }
 
-        .a {
+        .displa_block {
             display: block;
         }
 
@@ -202,7 +200,7 @@
 
         }
 
-        const a = document.querySelector('.a')
+        //const a = document.querySelector('.a')
         const img_voda = document.querySelector('.img_voda')
         const img_electr = document.querySelector('.img_electr')
         const button_prompt = document.querySelectorAll('.button_prompt')
@@ -211,21 +209,21 @@
         button_close.addEventListener('click', function () {
 
             modal_toggle(modal)
-            img_electr.classList.remove('a')
-            img_voda.classList.remove('a')
+            img_electr.classList.remove('displa_block')
+            img_voda.classList.remove('displa_block')
         })
         button_prompt[0].addEventListener('click', function () {
 
             modal_toggle(modal)
 
-            img_electr.classList.toggle('a')
+            img_electr.classList.toggle('displa_block')
 
         })
         button_prompt[1].addEventListener('click', function () {
 
             modal_toggle(modal)
 
-            img_voda.classList.toggle('a')
+            img_voda.classList.toggle('displa_block')
 
         })
         let price = new Data(0, 5.6, 1.63, 205.15, 42.3, 30.9);
@@ -370,7 +368,7 @@
             return summa
         }
         function modal_toggle(el) {
-            el.classList.toggle('modal_block')
+            el.classList.toggle('displa_block')
         }
 
 
