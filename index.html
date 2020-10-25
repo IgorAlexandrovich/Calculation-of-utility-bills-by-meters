@@ -274,9 +274,9 @@
                 let count1 = 0;
                 let count = 1;
                 for (let i in previous_indication) {
-                    if (data_entry[count] === undefined) {
-                        break
-                    }
+//                     if (data_entry[count] === undefined) {
+//                         break
+//                     } из за этого блока неправильно считает
                     previous_indication[i] = text[count1]
                     count1++
                     data_entry[count].placeholder = text[count];
