@@ -3,7 +3,7 @@
 
 $login = $_POST['login'];
 $password = $_POST['password'];
-var_dump $_POST
+var_dump ($_POST);
 
 
 ?>
