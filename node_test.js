@@ -10,17 +10,27 @@ http.createServer(
                 body += chunk.toString();
             });
             request.on('end', () => {
-                console.log(body);
+                //console.log(body);
                  let params = parse(body);
-                 console.log(params);
-                 console.log(params.hi);
-                response.end('ok');
+                 //console.log(params.login);
+                // console.log(params.password);
+                //response.end('ok');
+                
+                check (params.login,params.password)
             });
     }
 ).listen(3000);
 
      
+function check (login,password) {
+    let query= `SELECT * FROM user_test WHERE BINARY login='${login}' AND BINARY password='${password}'`;
 
+conn.query(query, (err, result, field) =>{
+   //console.log(err);
+    console.log(result);// приходит либо пустой либо с данными если есть
+    // console.log(field);
+});
+}
 
 const conn = mysql.createConnection(config);
 
@@ -33,12 +43,6 @@ conn.connect(function (err) {
     }
 });
 
-let query= "SELECT * FROM user_test WHERE BINARY login='igor' AND BINARY password='bar'";
 
-conn.query(query, (err, result, field) =>{
-    //console.log(err);
-    console.log(result);
-     // console.log(field);
-});
  
 
