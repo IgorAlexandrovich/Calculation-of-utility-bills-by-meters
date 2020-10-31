@@ -50,8 +50,9 @@
                 body: forma
             }
 
-            let responce = await fetch('obr.php', option);
+            let responce = await fetch('http://localhost:3000', option);
             let text = await responce.text()//продумать ответ
+            console.log(text)
         }
 
 
