@@ -13,7 +13,6 @@ http.createServer((request, response) => {
                  let params = parse(body);     
                 
                check (params.login,params.password)
-
             });
 
 function check (login,password) {
@@ -25,9 +24,12 @@ conn.query(query, (err, result, field) =>{
     // console.log(field);
 if (result[0]){
     console.log(` Вы ${result[0].login}  авторизованны`)
+    response.end(`Ваш логин: ${result[0].login } 
+    Ваш пароль:  ${result[0].password} `)
 }
 else{
-    console.log('вы не авторизованы')
+    console.log('вы не авторизованы');
+    response.end('вы не авторизованы')
 }
 });
 }
@@ -49,7 +51,7 @@ conn.connect(function (err) {
 
     }
    
-).listen(3000);
+).listen(3001);
 
      
 
