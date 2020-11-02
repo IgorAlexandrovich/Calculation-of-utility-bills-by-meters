@@ -44,12 +44,12 @@ function check_open(log){
        
         // console.log(result);
          //response.end(result[0].date)
-         let str =''
+        //  let str =''
             
-         for (const [country, capital] of Object.entries(result[0]))
-         str+=country+'='+capital
+        //  for (const [country, capital] of Object.entries(result[0]))
+        //  str+=country+'='+capital
          
-         response.end(str)
+         response.end(JSON.stringify(result[0]))
      });
 }
 
