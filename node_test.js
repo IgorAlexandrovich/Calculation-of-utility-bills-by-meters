@@ -24,15 +24,30 @@ conn.query(query, (err, result, field) =>{
     // console.log(field);
 if (result[0]){
     console.log(` Вы ${result[0].login}  авторизованны`)
-    response.end(`Ваш логин: ${result[0].login } 
-    Ваш пароль:  ${result[0].password} `)
+    // response.end(`Ваш логин: ${result[0].login } 
+    // Ваш пароль:  ${result[0].password} `)
+    check_open(result[0].login)
 }
 else{
     console.log('вы не авторизованы');
     response.end('вы не авторизованы')
 }
+
+
 });
 }
+
+function check_open(log){
+    let query= "SELECT `date`, `electricity_day`, `electricity_night`, `cold_water`, `hot_water`, `id` FROM "+log ;
+    console.log(query)
+    conn.query(query, (err, result, field) =>{
+       
+         console.log(result);
+     
+     });
+}
+
+
 
 const conn = mysql.createConnection(config);
 
