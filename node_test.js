@@ -39,11 +39,17 @@ else{
 
 function check_open(log){
     let query= "SELECT `date`, `electricity_day`, `electricity_night`, `cold_water`, `hot_water`, `id` FROM "+log ;
-    console.log(query)
+    //console.log(query)
     conn.query(query, (err, result, field) =>{
        
-         console.log(result);
-     
+        // console.log(result);
+         //response.end(result[0].date)
+         let str =''
+            
+         for (const [country, capital] of Object.entries(result[0]))
+         str+=country+'='+capital
+         
+         response.end(str)
      });
 }
 
