@@ -11,27 +11,27 @@ http.createServer((request, response) => {
     });
     request.on('end', () => {
         let params = parse(body);
-
-        check(params.login, params.password)
+        // прописать условие регистрация или авторизация открывать соединение с БД и в случае 1 запускать функцию регистрации, в случае 2 запускать функцию авторизации
+        connection_to_db(params.login, params.password)
     });
     
- 
-    function check(login, password) {
-        let query = `SELECT * FROM user_test WHERE BINARY login='${login}' AND BINARY password='${password}'`;
-        //as_v_bd('data_kv555') // функция ниже запись в БД новой таблицы с показаниями пользователя
-        function as_v_bd(new_name_tabl) {
-           
-            let query = "CREATE TABLE `test_baze`.`" + new_name_tabl +"` ( `date` VARCHAR(20) NOT NULL , `electricity_day` VARCHAR(8) NOT NULL , `electricity_night` VARCHAR(8) NOT NULL , `cold_water` VARCHAR(8) NOT NULL , `hot_water` VARCHAR(15) NOT NULL , `id` VARCHAR(11) NOT NULL ) ENGINE = InnoDB"; conn.query(query, (err, result, field) => {
+     const conn = mysql.createConnection(config); 
 
-               console.log(field)
-               console.log(result)
-               console.log(err)
-            });
-            
-    
-        }
-
-        conn.query(query, (err, result, field) => {
+    function connection_to_db(login, password) {
+        let query = `SELECT * FROM user_test WHERE BINARY login='${login}' AND BINARY password='${password}'`;//создаем запрос в БД
+  
+        conn.connect(function (err) {
+            if (err) {
+                return console.error("Ошибка: " + err.message);
+            }
+            else {
+                console.log("Подключение к серверу MySQL успешно установлено ");
+            }
+        });authorization (query)
+        }// открываем доступ к БД
+        
+        function authorization (query){
+              conn.query(query, (err, result, field) => {
             console.log(result[0]);// приходит либо пустой либо с данными если есть
             if (result[0]) {
                 console.log(` Вы ${result[0].login}  авторизованны`)
@@ -44,34 +44,27 @@ http.createServer((request, response) => {
 
 
         });
+        }// функция авторизации 
+      
 
-    }
+        //  as_v_bd('data_kv555') 
+        //  function as_v_bd(new_name_tabl) {
+           
+        //     let query = "CREATE TABLE `test_baze`.`" + new_name_tabl +"` ( `date` VARCHAR(20) NOT NULL , `electricity_day` VARCHAR(8) NOT NULL , `electricity_night` VARCHAR(8) NOT NULL , `cold_water` VARCHAR(8) NOT NULL , `hot_water` VARCHAR(15) NOT NULL , `id` VARCHAR(11) NOT NULL ) ENGINE = InnoDB"; conn.query(query, (err, result, field) => {
+
+        //        console.log(field)
+        //        console.log(result)
+        //        console.log(err)
+        //     }); // функция  запись в БД новой таблицы с показаниями пользователя при регистрации
 
     function check_open(log) {
         let query = "SELECT `date`, `electricity_day`, `electricity_night`, `cold_water`, `hot_water`, `id` FROM " + log;
-        conn.query(query, (err, result, field) => {
+        console.log(query)
+         conn.query(query, (err, result, field) => {
 
-            response.end(JSON.stringify(result[0]))
-        });
-    }
-
-
-    const conn = mysql.createConnection(config);
-
-    conn.connect(function (err) {
-        if (err) {
-            return console.error("Ошибка: " + err.message);
-        }
-        else {
-            console.log("Подключение к серверу MySQL успешно установлено ");
-        }
-
-
-    });
-
+             response.end(JSON.stringify(result[0]))}
+          ) };
 }
-
-
 
 ).listen(3001);
 
