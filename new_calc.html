@@ -1,0 +1,46 @@
+<script>
+
+    let price = new Data(5.6, 1.63, 205.15, 42.3, 30.9);
+    let new_pok = new Data(8223, 4266, 206.946, 291.018);
+    let star_pok = new Data(8138, 4237, 202.558, 285.488);
+
+    function Data(indication_electricity_day, indication_electricity_night, indication_hot_water, indication_cold_water, water_disposal) {
+        this.electricity_day = indication_electricity_day;
+        this.electricity_night = indication_electricity_night;
+        this.hot_water = indication_hot_water;
+        this.cold_water = indication_cold_water;
+        this.water_disposal = water_disposal;
+    };
+
+
+    calc(price, new_pok, star_pok)
+
+    function calc(obg_price, obg_new_data, obg_old_data) {
+
+        let price_electricity_day = obg_price.electricity_day;
+        let price_electricity_night = obg_price.electricity_night;
+        let price_hot_water = obg_price.hot_water;
+        let price_cold_water = obg_price.cold_water;
+        let price_water_disposal = obg_price.water_disposal;
+
+        let new_data_electricity_day = obg_new_data.electricity_day;
+        let new_data_electricity_night = obg_new_data.electricity_night;
+        let new_data_hot_water = obg_new_data.hot_water;
+        let new_data_cold_water = obg_new_data.cold_water;
+
+        let old_electricity_day = obg_old_data.electricity_day;
+        let old_electricity_night = obg_old_data.electricity_night;
+        let old_hot_water = obg_old_data.hot_water;
+        let old_cold_water = obg_old_data.cold_water;
+
+        let electricity_day = +((new_data_electricity_day - old_electricity_day) * price_electricity_day).toFixed(2);
+        let electricity_night = +((new_data_electricity_night - old_electricity_night) * price_electricity_night).toFixed(2);
+        let hot_water = +((new_data_hot_water - old_hot_water) * price_hot_water).toFixed(2);
+        let cold_water = +((new_data_cold_water - old_cold_water) * price_cold_water).toFixed(2);
+        let water_disposal = +(((new_data_hot_water - old_hot_water)+(new_data_cold_water - old_cold_water)) * price_water_disposal).toFixed(2);
+
+        summa = electricity_day + electricity_night + hot_water + cold_water + water_disposal;
+        console.log(summa)
+    }// функция калькулятор принимает 3 обьекта(новые показания, старые показания, прайс) и считает итог
+
+</script>

@@ -55,7 +55,7 @@ let previous_indication = new Data(0, 0, 0, 0, 0);// предыдущие пок
 let result;// обьект вычетание нов из старого
 let itog; // обьект конечные цены 
 let summa; // сумма к оплате
-
+console.log(price)
 form.addEventListener("submit", function (event) {
     event.preventDefault();
 
