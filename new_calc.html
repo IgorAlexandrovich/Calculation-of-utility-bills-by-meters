@@ -1,8 +1,8 @@
 <script>
 
-    let price = new Data(5.6, 1.63, 205.15, 42.3, 30.9);
-    let new_pok = new Data(8223, 4266, 206.946, 291.018);
-    let star_pok = new Data(8138, 4237, 202.558, 285.488);
+    let price = new Data(5.6, 1.63, 205.15, 42.3, 30.9); // прайс подгружается из БД при входе
+    let new_pok = new Data(8223, 4266, 206.946, 291.018); // берутся из инпута при вводе
+    let star_pok = new Data(8138, 4237, 202.558, 285.488);// старрые показания подгружат БД при входе
 
     function Data(indication_electricity_day, indication_electricity_night, indication_hot_water, indication_cold_water, water_disposal) {
         this.electricity_day = indication_electricity_day;
